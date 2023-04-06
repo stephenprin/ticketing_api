@@ -1,6 +1,14 @@
 import { ValidationError } from 'express-validator';
 
-export class DatabaseValidationError extends Error { 
+interface CustomError { 
+    statusCode: number;
+    serializeErrors(): {
+        message: string,
+        field?: string
+    }[]
+}
+
+export class DatabaseValidationError extends Error implements CustomError { 
     reason = 'Error connecting to database';
     statusCode = 500;
     constructor() {

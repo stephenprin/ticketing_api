@@ -9,7 +9,7 @@ export const errorHandler = (err:Error, req:Request, res:Response, next:NextFunc
     }
     if (err instanceof DatabaseValidationError) { 
         
-        return res.status(500).send({ errors: err.serializeErrors() })
+        return res.status(err.statusCode ).send({ errors: err.serializeErrors() })
     }
         
     return res.status(500).send({
